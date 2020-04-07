@@ -17,18 +17,49 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 
-using std::cout;
+using namespace std;
+//using std::cout;
 
 int main(int argc, const char * argv[])
 {
+    const int SCREEN_WIDTH = 800;
+    const int SCREEN_HIGHT = 600;
     
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
-        cout << "Failed to initialise SDL\n";
-        return -1;
+        cout << "Failed to initialise SDL" << endl;
+        return 1;
     }
     
-    cout << "Hooray it works!\n";
+    SDL_Window *window = SDL_CreateWindow("Particle Fire Explosion", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HIGHT, SDL_WINDOW_SHOWN);
+    
+    // Check that the window was successfully created
+    if (window == NULL) {
+        // In the case that the window could not be made...
+        cout << "Could not create window: %s\n" << SDL_GetError() << endl;
+        return 1;
+    }
+    
+    //game loop...
+    bool quit = false;
+    SDL_Event event;
+    while(!quit)
+    {
+        //update particles
+        //draw particles
+        //check for messages/events
+        
+        while(SDL_PollEvent(&event))
+        {
+            if(event.type == SDL_QUIT)
+            {
+                quit = true;
+            }
+        }
+        
+    }
+    
+    SDL_DestroyWindow(window);
     SDL_Quit();
     return 0;
 }
