@@ -37,8 +37,41 @@ int main(int argc, const char * argv[])
     if (window == NULL) {
         // In the case that the window could not be made...
         cout << "Could not create window: %s\n" << SDL_GetError() << endl;
-        return 1;
+        return 2;
     }
+    
+    // Textures, Renderers & Buffers: lecture 63
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+    SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STATIC, SCREEN_WIDTH, SCREEN_HIGHT);
+    
+    if(renderer == NULL)
+    {
+        cout << "Could not create renderer" << endl;
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 3;
+    }
+    
+    if (texture == NULL) {
+        cout << "Could not create texture" << endl;
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 4;
+    }
+    
+    //Need area of memory to hold all the pixels in the window,relating to RGBA = 8+8+8+8 = 32
+    Uint32 *buffer = new Uint32[SCREEN_WIDTH*SCREEN_HIGHT];  //Will this return NULL or raise an exception if memory allocation fails?
+    
+    //Set a block of memory with a particular value.
+    //Write some pixel information in the buffer.  This will change what is displayed in the window.
+    memset(buffer, 0xFF, SCREEN_WIDTH*SCREEN_HIGHT*sizeof(Uint32));  //the value 255 (0xFF) will produce a white screen.
+                                                                    //NB: One byte specifies one pixel.
+    
+    SDL_UpdateTexture(texture, NULL, buffer, SCREEN_WIDTH*sizeof(Uint32)); //pitch is the amount of mememory allocated to one row of pixels
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_RenderPresent(renderer);
     
     //game loop...
     bool quit = false;
@@ -59,6 +92,9 @@ int main(int argc, const char * argv[])
         
     }
     
+    delete [] buffer;
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyTexture(texture);
     SDL_DestroyWindow(window);
     SDL_Quit();
     return 0;
