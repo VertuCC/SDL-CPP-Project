@@ -65,8 +65,14 @@ int main(int argc, const char * argv[])
     
     //Set a block of memory with a particular value.
     //Write some pixel information in the buffer.  This will change what is displayed in the window.
-    memset(buffer, 0xFF, SCREEN_WIDTH*SCREEN_HIGHT*sizeof(Uint32));  //the value 255 (0xFF) will produce a white screen.
+    memset(buffer, 0, SCREEN_WIDTH*SCREEN_HIGHT*sizeof(Uint32));  //the value 255 (0xFF) will produce a white screen.
                                                                     //NB: One byte specifies one pixel.
+    
+    
+    for (int i=0; i<SCREEN_WIDTH*SCREEN_HIGHT; i++)
+    {
+        buffer[i] = 0x00FF80FF;  //Bit shfting colours: RGBA
+    }
     
     SDL_UpdateTexture(texture, NULL, buffer, SCREEN_WIDTH*sizeof(Uint32)); //pitch is the amount of mememory allocated to one row of pixels
     SDL_RenderClear(renderer);
