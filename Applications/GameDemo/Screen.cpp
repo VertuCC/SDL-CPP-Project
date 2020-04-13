@@ -12,7 +12,6 @@ Screen::Screen(): m_window(NULL), m_renderer(NULL), m_texture(NULL), m_buffer(NU
     
 }
 
-
 bool Screen::init()
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -50,26 +49,39 @@ bool Screen::init()
     }
     
     //Need area of memory to hold all the pixels in the window,relating to RGBA = 8+8+8+8 = 32
-    Uint32 *buffer = new Uint32[SCREEN_WIDTH*SCREEN_HIGHT];  //Will this return NULL or raise an exception if memory allocation fails?
+    m_buffer = new Uint32[SCREEN_WIDTH*SCREEN_HIGHT];  //Will this return NULL or raise an exception if memory allocation fails?
     
     //Set a block of memory with a particular value.
-    //Write some pixel information in the buffer.  This will change what is displayed in the window.
-    memset(buffer, 0, SCREEN_WIDTH*SCREEN_HIGHT*sizeof(Uint32));  //the value 255 (0xFF) will produce a white screen.
+    //Write some pixel information to the buffer.  This will change what is displayed in the window.
+    memset(m_buffer, 0, SCREEN_WIDTH*SCREEN_HIGHT*sizeof(Uint32));  //the value 255 (0xFF) will produce a white screen.
                                                                     //NB: One byte specifies one pixel.
     
+    return true;
+}
+
+void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
+{
+ //   Uint32 *m_buffer = new Uint32[SCREEN_WIDTH*SCREEN_HIGHT];
+    Uint32 color = 0;
     
-    for (int i=0; i<SCREEN_WIDTH*SCREEN_HIGHT; i++)
-    {
-        buffer[i] = 0xFFFF00FF;  //Bit shfting colours: RGBA
-    }
+    color += red;
+    color <<= 8;
+    color += green;
+    color <<= 8;
+    color += blue;
+    color <<= 8;
+    color += 0xFF;
     
+    m_buffer[(y * SCREEN_WIDTH) + x] = color;
+}
+
+void Screen::update()
+{
     //Drawing code ...
-    SDL_UpdateTexture(m_texture, NULL, buffer, SCREEN_WIDTH*sizeof(Uint32)); //pitch is the amount of mememory allocated to one row of pixels
+    SDL_UpdateTexture(m_texture, NULL, m_buffer, SCREEN_WIDTH*sizeof(Uint32)); //pitch is the amount of mememory allocated to one row of pixels
     SDL_RenderClear(m_renderer);
     SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
     SDL_RenderPresent(m_renderer);
-    
-    return true;
 }
 
 bool Screen::processEvents()
