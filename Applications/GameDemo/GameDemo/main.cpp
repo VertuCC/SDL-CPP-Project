@@ -16,14 +16,17 @@
 
 #include <iostream>
 #include <SDL2/SDL.h>
-//#include <math.h>
 #include "Screen.hpp"
+#include "Swarm.hpp"
+#include <stdlib.h>
 
 using namespace std;
 //using std::cout;
 
 int main(int argc, const char * argv[])
 {
+    srand(time(NULL)); //seeds the random number generator
+    
     Screen screen;
     
     if (screen.init()==false)
@@ -31,24 +34,27 @@ int main(int argc, const char * argv[])
         cout << "Error intialising SDL." << endl;
     }
     
-    //game loop...
+    Swarm swarm;
+    
 
-    while(true)
+    while(true)//game loop...
     {
-        
         int elapsed = SDL_GetTicks();  //number of miliseconds since program started
         //colour changing algorithm
-        unsigned char green = (unsigned char)((1 + cos(elapsed * 0.0001)) * 128);
+        unsigned char green = (unsigned char)((1 + sin(elapsed * 0.0001)) * 128);
         unsigned char red = (unsigned char)((1 + sin(elapsed * 0.0002)) * 128);
         unsigned char blue = (unsigned char)((1 + sin(elapsed * 0.0003)) * 128);
         
-        //update particles
-        for(int y=0; y < Screen::SCREEN_HIGHT; y++)
+        const Particle * const pParticles = swarm.getParticles();
+        
+        for(int i=0;i<Swarm::NPARTICLES;i++)
         {
-            for(int x=0; x < Screen::SCREEN_WIDTH; x++)
-            {
-                screen.setPixel(x, y, red, green, blue);
-            }
+            Particle particle = pParticles[i];
+            
+            int x = (particle.m_x +1) * Screen::SCREEN_WIDTH/2;
+            int y = (particle.m_y +1) * Screen::SCREEN_HIGHT/2;
+            
+            screen.setPixel(x, y, red, green, blue);
         }
         
         //draw particles

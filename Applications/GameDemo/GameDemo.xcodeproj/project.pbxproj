@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7E7A7AD82439E86D00AE9053 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E7A7AD52439E82100AE9053 /* SDL2.framework */; };
 		7E7A7AE42439EB5000AE9053 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E7A7AE32439EB5000AE9053 /* SDL2.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7EB889D8244885E50019192E /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EB889D6244885E50019192E /* Particle.cpp */; };
+		7EB889DB2448870B0019192E /* Swarm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EB889D92448870B0019192E /* Swarm.cpp */; };
 		7EBD79D624418FDB00448702 /* Screen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EBD79D424418FDB00448702 /* Screen.cpp */; };
 		7EF1B8582435025100BA9A30 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1B8572435025100BA9A30 /* main.cpp */; };
 /* End PBXBuildFile section */
@@ -41,6 +43,10 @@
 		7E7A7AE32439EB5000AE9053 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		7E88B5B0243612DD004B2AA8 /* Headers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Headers; path = "../../ThirdParty/SDL2-2.0.12/SDL2.framework/Versions/A/Headers"; sourceTree = "<group>"; };
 		7E88B5B12436131C004B2AA8 /* SDL2 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = SDL2; path = "../../ThirdParty/SDL2-2.0.12/SDL2.framework/Versions/A/SDL2"; sourceTree = "<group>"; };
+		7EB889D6244885E50019192E /* Particle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
+		7EB889D7244885E50019192E /* Particle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Particle.hpp; sourceTree = "<group>"; };
+		7EB889D92448870B0019192E /* Swarm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Swarm.cpp; sourceTree = "<group>"; };
+		7EB889DA2448870B0019192E /* Swarm.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Swarm.hpp; sourceTree = "<group>"; };
 		7EBD79D424418FDB00448702 /* Screen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Screen.cpp; sourceTree = "<group>"; };
 		7EBD79D524418FDB00448702 /* Screen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Screen.hpp; sourceTree = "<group>"; };
 		7EF1B8542435025100BA9A30 /* GameDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameDemo; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +69,10 @@
 		7EF1B84B2435025100BA9A30 = {
 			isa = PBXGroup;
 			children = (
+				7EB889D92448870B0019192E /* Swarm.cpp */,
+				7EB889DA2448870B0019192E /* Swarm.hpp */,
+				7EB889D6244885E50019192E /* Particle.cpp */,
+				7EB889D7244885E50019192E /* Particle.hpp */,
 				7EBD79D424418FDB00448702 /* Screen.cpp */,
 				7EBD79D524418FDB00448702 /* Screen.hpp */,
 				7E7A7AE32439EB5000AE9053 /* SDL2.framework */,
@@ -157,7 +167,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EB889DB2448870B0019192E /* Swarm.cpp in Sources */,
 				7EF1B8582435025100BA9A30 /* main.cpp in Sources */,
+				7EB889D8244885E50019192E /* Particle.cpp in Sources */,
 				7EBD79D624418FDB00448702 /* Screen.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
