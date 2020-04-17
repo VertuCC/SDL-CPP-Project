@@ -35,11 +35,13 @@ int main(int argc, const char * argv[])
     }
     
     Swarm swarm;
-    
 
-    while(true)//game loop...
+    while(true)//game loop... 
     {
         int elapsed = SDL_GetTicks();  //number of miliseconds since program started
+        
+        screen.clear();
+        swarm.update();
         //colour changing algorithm
         unsigned char green = (unsigned char)((1 + sin(elapsed * 0.0001)) * 128);
         unsigned char red = (unsigned char)((1 + sin(elapsed * 0.0002)) * 128);
@@ -48,7 +50,7 @@ int main(int argc, const char * argv[])
         const Particle * const pParticles = swarm.getParticles();
         
         for(int i=0;i<Swarm::NPARTICLES;i++)
-        {
+        {//draw particles
             Particle particle = pParticles[i];
             
             int x = (particle.m_x +1) * Screen::SCREEN_WIDTH/2;

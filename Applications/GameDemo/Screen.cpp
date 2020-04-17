@@ -49,14 +49,17 @@ bool Screen::init()
     }
     
     //allocate area of memory for display relating to RGBA = 8+8+8+8 = 32
-    m_buffer = new Uint32[SCREEN_WIDTH*SCREEN_HIGHT];  //Will this return NULL or raise an exception if memory allocation fails?
+    m_buffer = new Uint32[SCREEN_WIDTH*SCREEN_HIGHT];  //initialise buffer to store screen pixels
     
-    //Set a block of memory with a particular value.
-    //Write some pixel information to the buffer.  This will change what is displayed in the window.
-    //memset(m_buffer, 0, SCREEN_WIDTH*SCREEN_HIGHT*sizeof(Uint32));  //the value 255 (0xFF) will produce a white screen.
-                                                                    //NB: One byte specifies one pixel.
+    //memset will set a block of memory with a particular value.
+    memset(m_buffer, 0, SCREEN_WIDTH*SCREEN_HIGHT*sizeof(Uint32));  //clears buffer upon initialisation
     
     return true;
+}
+
+void Screen::clear()
+{
+    memset(m_buffer, 0, SCREEN_WIDTH*SCREEN_HIGHT*sizeof(Uint32));
 }
 
 void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
@@ -77,7 +80,7 @@ void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
     color <<= 8;
     color += 0xFF;
     
-    m_buffer[(y * SCREEN_WIDTH) + x] = color;
+    m_buffer[(y * SCREEN_WIDTH) + x] = color;  //drawing buffer
 }
 
 void Screen::update()

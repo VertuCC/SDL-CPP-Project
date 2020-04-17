@@ -14,14 +14,16 @@
 class Swarm
 {
 public:
-    const static int NPARTICLES = 5000;
+    const static int NPARTICLES = 1000;
     
 private:
     Particle * m_pParticles; //m because it's a instance variable, p because it's a pointer
 
 public:
     Swarm();
-    virtual ~Swarm();
+    virtual ~Swarm();  //this virtual method could be overidding
+    void update();
+    
     const Particle *const getParticles() {return m_pParticles;};
 };
 #endif /* Swarm_hpp */
