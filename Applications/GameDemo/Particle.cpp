@@ -13,7 +13,7 @@
 Particle::Particle():m_x(0),m_y(0) //constructure inilisation list...
 {//constructor    
     m_direction = (2 * M_PI * rand())/RAND_MAX; // calculate angle of particle
-    m_speed = (0.001 * rand())/RAND_MAX; // calculate speed of particle
+    m_speed = (0.0001 * rand())/RAND_MAX; // calculate speed of particle
 }
 
 Particle::~Particle()
@@ -21,12 +21,13 @@ Particle::~Particle()
     
 }
 
-void Particle::update()
+void Particle::update(int interval)
 { //calculate how much to move the x and y coordinates by
     double xspeed = m_speed * cos(m_direction);
     double yspeed = m_speed * sin(m_direction);
     
-    m_x += xspeed;
-    m_y += yspeed;
+    //move particles propotional to native execution speed of the game loop
+    m_x += xspeed * interval;
+    m_y += yspeed * interval;
 
 }

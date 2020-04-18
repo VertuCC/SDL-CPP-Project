@@ -18,11 +18,12 @@ public:
     
 private:
     Particle * m_pParticles; //m because it's a instance variable, p because it's a pointer
+    int lastTime;
 
 public:
     Swarm();
     virtual ~Swarm();  //this virtual method could be overidding
-    void update();
+    void update(int elapsed);
     
     const Particle *const getParticles() {return m_pParticles;};
 };

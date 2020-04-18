@@ -41,7 +41,8 @@ int main(int argc, const char * argv[])
         int elapsed = SDL_GetTicks();  //number of miliseconds since program started
         
         screen.clear();
-        swarm.update();
+        swarm.update(elapsed);
+        
         //colour changing algorithm
         unsigned char green = (unsigned char)((1 + sin(elapsed * 0.0001)) * 128);
         unsigned char red = (unsigned char)((1 + sin(elapsed * 0.0002)) * 128);
