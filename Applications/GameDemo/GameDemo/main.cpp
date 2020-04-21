@@ -40,7 +40,7 @@ int main(int argc, const char * argv[])
     {
         int elapsed = SDL_GetTicks();  //number of miliseconds since program started
         
-        screen.clear();
+        
         swarm.update(elapsed);
         
         //colour changing algorithm
@@ -59,6 +59,8 @@ int main(int argc, const char * argv[])
             
             screen.setPixel(x, y, red, green, blue);
         }
+        
+        screen.boxBlur();  
         
         //draw particles
         screen.update();
