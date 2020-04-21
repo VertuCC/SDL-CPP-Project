@@ -15,8 +15,13 @@ struct Particle
 {
     double m_x; //m to indicate that it's a member variable
     double m_y;
+    
+private:
     double m_speed;
     double m_direction;
+    
+private:
+    void init();
     
 public:
     Particle();
