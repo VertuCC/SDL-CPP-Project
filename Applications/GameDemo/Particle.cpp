@@ -26,11 +26,6 @@ void Particle::init()
     m_speed *= m_speed;
 }
 
-Particle::~Particle()
-{//destructor
-    
-}
-
 void Particle::update(int interval)
 { //calculate how much to move the x and y coordinates
     m_direction += interval * 0.0004;
@@ -51,5 +46,9 @@ void Particle::update(int interval)
     {
         init();
     }
+}
 
+Particle::~Particle()
+{//destructor
+    
 }

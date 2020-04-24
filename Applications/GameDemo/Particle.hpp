@@ -24,8 +24,8 @@ private:
     void init();
     
 public:
-    Particle();
-    virtual ~Particle();
+    Particle(); //constructor
+    virtual ~Particle(); //keyword virtual ensures that the correct destructor is called.
     void update(int interval);
 };
 

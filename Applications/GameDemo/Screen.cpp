@@ -9,8 +9,9 @@
 #include "Screen.hpp"
 
 Screen::Screen(): m_window(NULL), m_renderer(NULL), m_texture(NULL), m_buffer1(NULL), m_buffer2(NULL){
-    
+    //constructor
 }
+
 
 bool Screen::init()
 {
@@ -49,18 +50,21 @@ bool Screen::init()
     }
     
     //allocate area of memory for display relating to RGBA = 8+8+8+8 = 32
-    m_buffer1 = new Uint32[SCREEN_WIDTH*SCREEN_HIGHT];  //initialise buffer to store screen pixels
+    //initialise buffer to store screen pixels.
+    m_buffer1 = new Uint32[SCREEN_WIDTH*SCREEN_HIGHT];
     m_buffer2 = new Uint32[SCREEN_WIDTH*SCREEN_HIGHT];
     
     //memset will set a block of memory with a particular value.
-    memset(m_buffer1, 0, SCREEN_WIDTH*SCREEN_HIGHT*sizeof(Uint32));  //clears buffer upon initialisation
+    //clears buffers upon initialisation.
+    memset(m_buffer1, 0, SCREEN_WIDTH*SCREEN_HIGHT*sizeof(Uint32));
     memset(m_buffer2, 0, SCREEN_WIDTH*SCREEN_HIGHT*sizeof(Uint32));
     
     return true;
 }
 
+
 void Screen::boxBlur()
-{
+{//implementation of the boxBlur algorithm
     Uint32 *temp = m_buffer1;
     m_buffer1 = m_buffer2;
     m_buffer2 = temp;
@@ -113,9 +117,9 @@ void Screen::boxBlur()
 
 void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
 {
-    //ensure that pixels are plotted within screen dimensions
+    
     if(x < 0 || x >= SCREEN_WIDTH || y < 0 || y >= SCREEN_HIGHT)
-    {
+    {//ensure that pixels are plotted within screen dimensions
         return;
     }
     
@@ -132,6 +136,7 @@ void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
     m_buffer1[(y * SCREEN_WIDTH) + x] = color;  //drawing buffer
 }
 
+
 void Screen::update()
 {
     //Drawing code ...
@@ -140,6 +145,7 @@ void Screen::update()
     SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
     SDL_RenderPresent(m_renderer);
 }
+
 
 bool Screen::processEvents()
 {
@@ -154,6 +160,7 @@ bool Screen::processEvents()
     }
     return true;
 }
+
 
 void Screen::close()
 {
